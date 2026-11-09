@@ -1,0 +1,19 @@
+{
+  "strategy": "SPY benchmark",
+  "cash": -0.0,
+  "holdings": {
+    "SPY": 10139.68
+  },
+  "costs": 5.0,
+  "trades": [
+    {
+      "fill_date": "2026-11-09",
+      "signal_date": "2026-11-06",
+      "ticker": "SPY",
+      "side": "BUY",
+      "value": 9995.0,
+      "price": 751.5151
+    }
+  ],
+  "equity_last": 10139.68
+}

@@ -1,0 +1,60 @@
+{
+  "strategy": "C. Aggressive momentum",
+  "cash": -0.0,
+  "holdings": {
+    "DBC": 3329.52,
+    "XLE": 3369.2,
+    "XLK": 3438.31
+  },
+  "costs": 5.0,
+  "trades": [
+    {
+      "fill_date": "2026-11-09",
+      "signal_date": "2026-11-06",
+      "ticker": "DBC",
+      "side": "BUY",
+      "value": 3331.67,
+      "price": 132.5765
+    },
+    {
+      "fill_date": "2026-11-09",
+      "signal_date": "2026-11-06",
+      "ticker": "XLE",
+      "side": "BUY",
+      "value": 3331.67,
+      "price": 288.3234
+    },
+    {
+      "fill_date": "2026-11-09",
+      "signal_date": "2026-11-06",
+      "ticker": "XLK",
+      "side": "BUY",
+      "value": 3331.67,
+      "price": 1549.5666
+    }
+  ],
+  "decisions": [
+    {
+      "signal_date": "2026-11-06",
+      "note": "top 3: DBC +48.2%, XLE +41.6%, XLK +39.6%",
+      "ranking": [
+        {
+          "ticker": "DBC",
+          "score": 0.4822,
+          "weight": 0.3333
+        },
+        {
+          "ticker": "XLE",
+          "score": 0.4159,
+          "weight": 0.3333
+        },
+        {
+          "ticker": "XLK",
+          "score": 0.396,
+          "weight": 0.3333
+        }
+      ]
+    }
+  ],
+  "equity_last": 10137.03
+}

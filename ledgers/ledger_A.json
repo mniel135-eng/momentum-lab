@@ -1,0 +1,88 @@
+{
+  "strategy": "A. Weekly trend",
+  "cash": -0.0,
+  "holdings": {
+    "DBC": 1997.71,
+    "FXI": 1997.85,
+    "TLT": 1991.95,
+    "XLP": 2014.07,
+    "XLV": 2019.48
+  },
+  "costs": 5.0,
+  "trades": [
+    {
+      "fill_date": "2026-11-09",
+      "signal_date": "2026-11-06",
+      "ticker": "DBC",
+      "side": "BUY",
+      "value": 1999.0,
+      "price": 132.5765
+    },
+    {
+      "fill_date": "2026-11-09",
+      "signal_date": "2026-11-06",
+      "ticker": "FXI",
+      "side": "BUY",
+      "value": 1999.0,
+      "price": 138.1748
+    },
+    {
+      "fill_date": "2026-11-09",
+      "signal_date": "2026-11-06",
+      "ticker": "TLT",
+      "side": "BUY",
+      "value": 1999.0,
+      "price": 104.1297
+    },
+    {
+      "fill_date": "2026-11-09",
+      "signal_date": "2026-11-06",
+      "ticker": "XLP",
+      "side": "BUY",
+      "value": 1999.0,
+      "price": 411.7944
+    },
+    {
+      "fill_date": "2026-11-09",
+      "signal_date": "2026-11-06",
+      "ticker": "XLV",
+      "side": "BUY",
+      "value": 1999.0,
+      "price": 677.9771
+    }
+  ],
+  "decisions": [
+    {
+      "signal_date": "2026-11-06",
+      "note": "top 5: XLV +10.8%, XLP +5.3%, DBC +5.1%, TLT +0.6%, FXI +0.2%",
+      "ranking": [
+        {
+          "ticker": "XLV",
+          "score": 0.1083,
+          "weight": 0.2
+        },
+        {
+          "ticker": "XLP",
+          "score": 0.0533,
+          "weight": 0.2
+        },
+        {
+          "ticker": "DBC",
+          "score": 0.0513,
+          "weight": 0.2
+        },
+        {
+          "ticker": "TLT",
+          "score": 0.0064,
+          "weight": 0.2
+        },
+        {
+          "ticker": "FXI",
+          "score": 0.0017,
+          "weight": 0.2
+        }
+      ]
+    }
+  ],
+  "equity_last": 10021.06
+}

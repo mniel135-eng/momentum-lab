@@ -1,0 +1,158 @@
+{
+  "strategy": "B. Monthly momentum",
+  "cash": -0.0,
+  "holdings": {
+    "DBC": 998.86,
+    "EEM": 1014.46,
+    "EWJ": 1014.58,
+    "EWZ": 1011.28,
+    "IWD": 1008.37,
+    "QQQ": 1024.64,
+    "SLV": 1012.97,
+    "XLE": 1010.76,
+    "XLK": 1031.49,
+    "XLV": 1009.74
+  },
+  "costs": 5.0,
+  "trades": [
+    {
+      "fill_date": "2026-11-09",
+      "signal_date": "2026-11-06",
+      "ticker": "DBC",
+      "side": "BUY",
+      "value": 999.5,
+      "price": 132.5765
+    },
+    {
+      "fill_date": "2026-11-09",
+      "signal_date": "2026-11-06",
+      "ticker": "EEM",
+      "side": "BUY",
+      "value": 999.5,
+      "price": 210.1889
+    },
+    {
+      "fill_date": "2026-11-09",
+      "signal_date": "2026-11-06",
+      "ticker": "EWJ",
+      "side": "BUY",
+      "value": 999.5,
+      "price": 316.0333
+    },
+    {
+      "fill_date": "2026-11-09",
+      "signal_date": "2026-11-06",
+      "ticker": "EWZ",
+      "side": "BUY",
+      "value": 999.5,
+      "price": 103.238
+    },
+    {
+      "fill_date": "2026-11-09",
+      "signal_date": "2026-11-06",
+      "ticker": "IWD",
+      "side": "BUY",
+      "value": 999.5,
+      "price": 555.2783
+    },
+    {
+      "fill_date": "2026-11-09",
+      "signal_date": "2026-11-06",
+      "ticker": "QQQ",
+      "side": "BUY",
+      "value": 999.5,
+      "price": 1320.0423
+    },
+    {
+      "fill_date": "2026-11-09",
+      "signal_date": "2026-11-06",
+      "ticker": "SLV",
+      "side": "BUY",
+      "value": 999.5,
+      "price": 164.7589
+    },
+    {
+      "fill_date": "2026-11-09",
+      "signal_date": "2026-11-06",
+      "ticker": "XLE",
+      "side": "BUY",
+      "value": 999.5,
+      "price": 288.3234
+    },
+    {
+      "fill_date": "2026-11-09",
+      "signal_date": "2026-11-06",
+      "ticker": "XLK",
+      "side": "BUY",
+      "value": 999.5,
+      "price": 1549.5666
+    },
+    {
+      "fill_date": "2026-11-09",
+      "signal_date": "2026-11-06",
+      "ticker": "XLV",
+      "side": "BUY",
+      "value": 999.5,
+      "price": 677.9771
+    }
+  ],
+  "decisions": [
+    {
+      "signal_date": "2026-11-06",
+      "note": "top 10: DBC +48.2%, XLE +41.6%, XLK +39.6%, SLV +28.7%, EEM +27.5%, EWJ +26.8%, EWZ +25.7%, QQQ +23.8%, IWD +23.7%, XLV +23.0%",
+      "ranking": [
+        {
+          "ticker": "DBC",
+          "score": 0.4822,
+          "weight": 0.1
+        },
+        {
+          "ticker": "XLE",
+          "score": 0.4159,
+          "weight": 0.1
+        },
+        {
+          "ticker": "XLK",
+          "score": 0.396,
+          "weight": 0.1
+        },
+        {
+          "ticker": "SLV",
+          "score": 0.2865,
+          "weight": 0.1
+        },
+        {
+          "ticker": "EEM",
+          "score": 0.2751,
+          "weight": 0.1
+        },
+        {
+          "ticker": "EWJ",
+          "score": 0.2678,
+          "weight": 0.1
+        },
+        {
+          "ticker": "EWZ",
+          "score": 0.2567,
+          "weight": 0.1
+        },
+        {
+          "ticker": "QQQ",
+          "score": 0.2379,
+          "weight": 0.1
+        },
+        {
+          "ticker": "IWD",
+          "score": 0.2367,
+          "weight": 0.1
+        },
+        {
+          "ticker": "XLV",
+          "score": 0.2303,
+          "weight": 0.1
+        }
+      ]
+    }
+  ],
+  "equity_last": 10137.16
+}
