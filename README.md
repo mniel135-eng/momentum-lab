@@ -23,9 +23,6 @@ Updates itself every weekday at 23:00 UTC. Nothing needs to be running on your m
 Or just `run.cmd`. The authoritative schedule is the GitHub Actions workflow, which
 runs weekdays at 23:00 UTC in the cloud. No local scheduled task is used.
 
-```bash
-```
-
 Every run refetches the full price history and **replays all ledgers from scratch**.
 Nothing is mutated incrementally. That means:
 
