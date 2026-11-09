@@ -3,6 +3,10 @@
 A 12-month paper-trading forward test: three momentum strategies, each with its own
 $10,000 fake-USD ledger, against a $10,000 buy-and-hold SPY benchmark.
 
+### → Live dashboard: https://mniel135-eng.github.io/momentum-lab/
+
+Updates itself every weekday at 23:00 UTC. Nothing needs to be running on your machine.
+
 **The rules are frozen in [RULES.md](RULES.md) and must not be edited while the test runs.**
 
 - Start signal: **2026-11-06** close
@@ -16,11 +20,10 @@ $10,000 fake-USD ledger, against a $10,000 buy-and-hold SPY benchmark.
 "C:\Users\danit\.claude\sessions\momentum-lab\.venv\Scripts\python.exe" "C:\Users\danit\.claude\sessions\momentum-lab\lab.py"
 ```
 
-Or just `run.cmd`. A scheduled task named **MomentumLab** already runs it weekdays at
-23:00 local (after the US close), with catch-up enabled.
+Or just `run.cmd`. The authoritative schedule is the GitHub Actions workflow, which
+runs weekdays at 23:00 UTC in the cloud. No local scheduled task is used.
 
 ```bash
-schtasks /Query /TN MomentumLab /FO LIST
 ```
 
 Every run refetches the full price history and **replays all ledgers from scratch**.
