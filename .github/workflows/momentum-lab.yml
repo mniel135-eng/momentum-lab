@@ -73,6 +73,10 @@ jobs:
             # push here. We lose only the 60-day activity reset, not the run.
             if ! git push; then
               echo "::warning title=Keepalive token rejected::Push with KEEPALIVE_TOKEN failed (check it grants Contents: Read and write on this repo). Falling back to GITHUB_TOKEN; the 60-day inactivity timer is NOT being reset."
+              # actions/checkout installs an http.extraheader Authorization for the
+              # checkout token, and that header beats credentials in the push URL.
+              # It must be removed or the fallback just replays the rejected token.
+              git config --unset-all http."https://github.com/".extraheader || true
               git push "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" HEAD:main
             fi
           fi
