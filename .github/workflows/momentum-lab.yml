@@ -21,7 +21,24 @@ jobs:
   run:
     runs-on: ubuntu-latest
     steps:
+      # GitHub disables scheduled workflows in a PUBLIC repo after 60 days of
+      # repository inactivity, and the docs do not promise that commits made with
+      # the default GITHUB_TOKEN count as activity. Pushing with a user-owned
+      # fine-grained PAT (secret KEEPALIVE_TOKEN) makes each nightly commit
+      # user-attributed, which does count, so the 60-day clock never runs out.
+      # If the secret is absent this falls back to the default token and the job
+      # still works - it just needs manual re-enabling roughly every 60 days.
       - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.KEEPALIVE_TOKEN || github.token }}
+
+      - name: Report which credential is in use
+        run: |
+          if [ -n "${{ secrets.KEEPALIVE_TOKEN }}" ]; then
+            echo "::notice title=Keepalive::Pushing as the repository owner (KEEPALIVE_TOKEN). The 60-day scheduled-workflow timer stays reset."
+          else
+            echo "::warning title=Keepalive missing::No KEEPALIVE_TOKEN secret. Commits are made by github-actions[bot], which may not count as repository activity, so GitHub may disable this schedule after 60 days of inactivity."
+          fi
 
       - uses: actions/setup-python@v5
         with:
@@ -35,8 +52,8 @@ jobs:
 
       - name: Commit updated ledgers and report
         run: |
-          git config user.name  "momentum-lab[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name  "mniel135-eng"
+          git config user.email "mniel135-eng@users.noreply.github.com"
           git add -A ledgers reports logs dashboard.html
           if git diff --staged --quiet; then
             echo "No change in results."
