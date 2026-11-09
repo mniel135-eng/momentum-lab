@@ -16,8 +16,16 @@ Updates itself every weekday at 23:00 UTC. Nothing needs to be running on your m
 
 ## Run it
 
+PowerShell (note the leading `&` — PowerShell will not run a quoted path without it):
+
+```powershell
+& "C:\Users\danit\.claude\sessions\momentum-lab\.venv\Scripts\python.exe" "C:\Users\danit\.claude\sessions\momentum-lab\lab.py"
+```
+
+Git Bash:
+
 ```bash
-"C:\Users\danit\.claude\sessions\momentum-lab\.venv\Scripts\python.exe" "C:\Users\danit\.claude\sessions\momentum-lab\lab.py"
+"/c/Users/danit/.claude/sessions/momentum-lab/.venv/Scripts/python.exe" "/c/Users/danit/.claude/sessions/momentum-lab/lab.py"
 ```
 
 Or just `run.cmd`. The authoritative schedule is the GitHub Actions workflow, which
