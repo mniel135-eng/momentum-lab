@@ -75,6 +75,11 @@
     border-radius: 7px; padding: 6px 11px; font: inherit; font-size: 13px; cursor: pointer;
   }
 
+  .stale {
+    margin: 18px 0 0; padding: 13px 16px; border-radius: 10px;
+    border: 1px solid var(--bad); color: var(--bad); font-size: 13.5px; line-height: 1.55;
+  }
+  .stale b { display: block; margin-bottom: 3px; }
   .verdict {
     margin: 22px 0 0; padding: 16px 18px; border-radius: 11px;
     background: var(--surface-1); border: 1px solid var(--border);
@@ -149,6 +154,8 @@
     <button class="theme" id="themeBtn" type="button">Theme</button>
   </div>
 
+  <div class="stale" id="stale" style="display:none"></div>
+
   <div class="verdict">
     <span class="badge" id="badge"></span>
     <p id="vdetail"></p>
@@ -179,7 +186,7 @@
 </div>
 <div class="tip" id="tip"></div>
 
-<script id="payload" type="application/json">{"generated_at": "2026-11-09 09:27 UTC", "data_through": "2026-11-06", "fingerprint": "e86c9a094db7043ee2efe9a51d65c4c9acb5d806f119e852143381a7d6a4aa8b", "phase": "pending", "status": "TOO EARLY", "detail": "Not trading yet. The initial signal is locked at the 2026-11-06 close and fills at the next session's open, which has not printed. Each ledger holds its full $10,000 in cash.", "caveat": "", "first_fill": null, "months_elapsed": null, "six_month_date": "2027-05-06", "twelve_month_date": "2027-11-06", "dd_allowance": null, "spy_maxdd": null, "series": {"A": {"name": "A. Weekly trend", "short": "Strategy A", "equity": 10000.0, "ret": null, "maxdd": null, "dd_ok": null, "costs": 0.0, "trades": 0, "cash": 0.0, "holdings": {"XLV": 0.2, "XLP": 0.2, "DBC": 0.2, "TLT": 0.2, "FXI": 0.2}, "latest_note": "top 5: XLV +10.8%, XLP +5.3%, DBC +5.1%, TLT +0.6%, FXI +0.2%"}, "B": {"name": "B. Monthly momentum", "short": "Strategy B", "equity": 10000.0, "ret": null, "maxdd": null, "dd_ok": null, "costs": 0.0, "trades": 0, "cash": 0.0, "holdings": {"XLE": 0.1, "DBC": 0.1, "XLV": 0.1, "IWD": 0.1, "XLB": 0.1, "XLP": 0.1, "XLK": 0.1, "EWJ": 0.1, "IWM": 0.1, "EFA": 0.1}, "latest_note": "top 10: XLE +63.4%, DBC +51.8%, XLV +30.3%, IWD +28.4%, XLB +25.3%, XLP +20.5%, XLK +20.0%, EWJ +16.2%, IWM +14.6%, EFA +13.1%"}, "C": {"name": "C. Aggressive momentum", "short": "Strategy C", "equity": 10000.0, "ret": null, "maxdd": null, "dd_ok": null, "costs": 0.0, "trades": 0, "cash": 0.0, "holdings": {"XLE": 0.333333, "DBC": 0.333333, "XLV": 0.333333}, "latest_note": "top 3: XLE +63.4%, DBC +51.8%, XLV +30.3%"}, "SPY": {"name": "SPY (benchmark)", "short": "SPY", "equity": 10000.0, "ret": null, "maxdd": null, "dd_ok": null, "costs": 0.0, "trades": 0, "cash": 0.0, "holdings": {}, "latest_note": "buy and hold SPY"}}, "curves": null}</script>
+<script id="payload" type="application/json">{"generated_at": "2026-11-09 09:30 UTC", "data_through": "2026-11-06", "fingerprint": "e86c9a094db7043ee2efe9a51d65c4c9acb5d806f119e852143381a7d6a4aa8b", "phase": "pending", "status": "TOO EARLY", "detail": "Not trading yet. The initial signal is locked at the 2026-11-06 close and fills at the next session's open, which has not printed. Each ledger holds its full $10,000 in cash.", "caveat": "", "first_fill": null, "months_elapsed": null, "six_month_date": "2027-05-06", "twelve_month_date": "2027-11-06", "dd_allowance": null, "spy_maxdd": null, "series": {"A": {"name": "A. Weekly trend", "short": "Strategy A", "equity": 10000.0, "ret": null, "maxdd": null, "dd_ok": null, "costs": 0.0, "trades": 0, "cash": 0.0, "holdings": {"XLV": 0.2, "XLP": 0.2, "DBC": 0.2, "TLT": 0.2, "FXI": 0.2}, "latest_note": "top 5: XLV +10.8%, XLP +5.3%, DBC +5.1%, TLT +0.6%, FXI +0.2%"}, "B": {"name": "B. Monthly momentum", "short": "Strategy B", "equity": 10000.0, "ret": null, "maxdd": null, "dd_ok": null, "costs": 0.0, "trades": 0, "cash": 0.0, "holdings": {"XLE": 0.1, "DBC": 0.1, "XLV": 0.1, "IWD": 0.1, "XLB": 0.1, "XLP": 0.1, "XLK": 0.1, "EWJ": 0.1, "IWM": 0.1, "EFA": 0.1}, "latest_note": "top 10: XLE +63.4%, DBC +51.8%, XLV +30.3%, IWD +28.4%, XLB +25.3%, XLP +20.5%, XLK +20.0%, EWJ +16.2%, IWM +14.6%, EFA +13.1%"}, "C": {"name": "C. Aggressive momentum", "short": "Strategy C", "equity": 10000.0, "ret": null, "maxdd": null, "dd_ok": null, "costs": 0.0, "trades": 0, "cash": 0.0, "holdings": {"XLE": 0.333333, "DBC": 0.333333, "XLV": 0.333333}, "latest_note": "top 3: XLE +63.4%, DBC +51.8%, XLV +30.3%"}, "SPY": {"name": "SPY (benchmark)", "short": "SPY", "equity": 10000.0, "ret": null, "maxdd": null, "dd_ok": null, "costs": 0.0, "trades": 0, "cash": 0.0, "holdings": {}, "latest_note": "buy and hold SPY"}}, "curves": null}</script>
 <script>
 (function () {
   "use strict";
@@ -207,6 +214,22 @@
   // ---- header -------------------------------------------------------------
   el("sub").textContent = "Data through " + D.data_through + " · generated " + D.generated_at +
     (D.months_elapsed != null ? " · " + D.months_elapsed + " months elapsed" : "");
+  // ---- staleness guard ----------------------------------------------------
+  // Catches every silent-death mode: the nightly job disabled, the data source
+  // blocking us, a library break. If the page stops being refreshed, it says so.
+  (function () {
+    var gen = Date.parse(D.generated_at.replace(" ", "T").replace(" UTC", "Z"));
+    if (isNaN(gen)) return;
+    var days = (Date.now() - gen) / 86400000;
+    if (days < 4) return;
+    var s = el("stale");
+    s.innerHTML = "<b>This page has not refreshed in " + Math.floor(days) + " days.</b>" +
+      "The nightly run last completed on " + D.generated_at + ". It is scheduled every weekday, " +
+      "so anything beyond about 4 days means it has stopped — check the Actions tab of the " +
+      "repository. The figures below are frozen as of that run and are no longer current.";
+    s.style.display = "block";
+  })();
+
   var cls = { "TOO EARLY": "early", "PASSED": "passed", "FAILED": "failed" };
   var bcls = cls[D.status] || (D.status.indexOf("LEADER") === 0 ? "leader" : "early");
   var b = el("badge"); b.className = "badge " + bcls; b.textContent = D.status;
