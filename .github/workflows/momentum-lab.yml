@@ -68,7 +68,13 @@ jobs:
             echo "No change in results."
           else
             git commit -m "Run $(date -u +%Y-%m-%d): refresh ledgers, report and dashboard [skip ci]"
-            git push
+            # The keepalive PAT can be misconfigured, revoked or expired. That must
+            # never stop the test: fall back to the built-in token, which can always
+            # push here. We lose only the 60-day activity reset, not the run.
+            if ! git push; then
+              echo "::warning title=Keepalive token rejected::Push with KEEPALIVE_TOKEN failed (check it grants Contents: Read and write on this repo). Falling back to GITHUB_TOKEN; the 60-day inactivity timer is NOT being reset."
+              git push "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" HEAD:main
+            fi
           fi
 
       - name: Assemble the published site
