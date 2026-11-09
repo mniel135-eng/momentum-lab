@@ -1,0 +1,68 @@
+name: Momentum Lab
+
+on:
+  schedule:
+    # 23:00 UTC Mon-Fri = 18:00 ET, safely after the US close year-round.
+    - cron: "0 23 * * 1-5"
+  workflow_dispatch:          # lets you run it by hand from the Actions tab
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: momentum-lab
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install --quiet "yfinance==1.8.0" pandas numpy
+
+      - name: Replay all ledgers from scratch
+        run: python lab.py
+
+      - name: Commit updated ledgers and report
+        run: |
+          git config user.name  "momentum-lab[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A ledgers reports logs dashboard.html
+          if git diff --staged --quiet; then
+            echo "No change in results."
+          else
+            git commit -m "Run $(date -u +%Y-%m-%d): refresh ledgers, report and dashboard"
+            git push
+          fi
+
+      - name: Assemble the published site
+        run: |
+          mkdir -p _site
+          cp dashboard.html _site/index.html
+          cp -r reports _site/reports
+          cp -r ledgers _site/ledgers
+          cp RULES.md README.md _site/
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  publish:
+    needs: run
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@v4

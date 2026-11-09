@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Momentum Lab</title>
+<style>
+  :root {
+    color-scheme: light;
+    --surface-0: #f6f6f4;
+    --surface-1: #fcfcfb;
+    --surface-2: #efefec;
+    --border:    #dcdcd6;
+    --text-primary:   #0b0b0b;
+    --text-secondary: #52514e;
+    --text-muted:     #7c7b75;
+    --series-a: #2a78d6;
+    --series-b: #eb6834;
+    --series-c: #1baf7a;
+    --series-spy: #7c7b75;
+    --good: #008300;
+    --bad:  #c0322f;
+    --warn: #eda100;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) {
+      color-scheme: dark;
+      --surface-0: #111110;
+      --surface-1: #1a1a19;
+      --surface-2: #242423;
+      --border:    #35352f;
+      --text-primary:   #f0efec;
+      --text-secondary: #c3c2b7;
+      --text-muted:     #8f8e85;
+      --series-a: #3987e5;
+      --series-b: #d95926;
+      --series-c: #199e70;
+      --series-spy: #8f8e85;
+      --good: #4ba94b;
+      --bad:  #e66767;
+      --warn: #c98500;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --surface-0: #111110;
+    --surface-1: #1a1a19;
+    --surface-2: #242423;
+    --border:    #35352f;
+    --text-primary:   #f0efec;
+    --text-secondary: #c3c2b7;
+    --text-muted:     #8f8e85;
+    --series-a: #3987e5;
+    --series-b: #d95926;
+    --series-c: #199e70;
+    --series-spy: #8f8e85;
+    --good: #4ba94b;
+    --bad:  #e66767;
+    --warn: #c98500;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--surface-0); color: var(--text-primary);
+    font: 15px/1.5 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-text-size-adjust: 100%;
+  }
+  .wrap { max-width: 1060px; margin: 0 auto; padding: 28px 16px 64px; }
+  h1 { font-size: 20px; margin: 0; letter-spacing: -0.01em; }
+  h2 { font-size: 15px; margin: 32px 0 12px; color: var(--text-secondary); font-weight: 600; }
+  .sub { color: var(--text-muted); font-size: 13px; margin-top: 4px; }
+  .topbar { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  button.theme {
+    background: var(--surface-1); color: var(--text-secondary); border: 1px solid var(--border);
+    border-radius: 7px; padding: 6px 11px; font: inherit; font-size: 13px; cursor: pointer;
+  }
+
+  .verdict {
+    margin: 22px 0 0; padding: 16px 18px; border-radius: 11px;
+    background: var(--surface-1); border: 1px solid var(--border);
+  }
+  .badge {
+    display: inline-block; padding: 3px 11px; border-radius: 999px;
+    font-size: 12px; font-weight: 700; letter-spacing: 0.04em;
+    border: 1px solid currentColor;
+  }
+  .badge.early  { color: var(--text-secondary); }
+  .badge.passed { color: var(--good); }
+  .badge.failed { color: var(--bad); }
+  .badge.leader { color: var(--warn); }
+  .verdict p { margin: 11px 0 0; color: var(--text-secondary); font-size: 14px; }
+
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(188px, 1fr)); gap: 12px; margin-top: 14px; }
+  .tile { background: var(--surface-1); border: 1px solid var(--border); border-radius: 11px; padding: 14px 15px; }
+  .tile .lbl { display: flex; align-items: center; gap: 7px; font-size: 13px; color: var(--text-secondary); }
+  .dot { width: 9px; height: 9px; border-radius: 50%; flex: none; }
+  .tile .val { font-size: 23px; font-weight: 650; margin-top: 7px; font-variant-numeric: tabular-nums; }
+  .tile .chg { font-size: 13px; margin-top: 3px; font-variant-numeric: tabular-nums; color: var(--text-secondary); }
+  .pos { color: var(--good); } .neg { color: var(--bad); }
+
+  .card { background: var(--surface-1); border: 1px solid var(--border); border-radius: 11px; padding: 16px; }
+  #chart { width: 100%; height: 330px; display: block; touch-action: pan-y; }
+  .legend { display: flex; flex-wrap: wrap; gap: 14px; margin: 2px 0 10px; font-size: 13px; color: var(--text-secondary); }
+  .legend span.i { display: inline-flex; align-items: center; gap: 6px; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  th, td { text-align: right; padding: 9px 10px; border-bottom: 1px solid var(--border); font-variant-numeric: tabular-nums; }
+  th:first-child, td:first-child { text-align: left; }
+  th { color: var(--text-muted); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; }
+  tr:last-child td { border-bottom: none; }
+  tr.bench td { color: var(--text-secondary); }
+  .chip { font-size: 11.5px; padding: 2px 7px; border-radius: 5px; border: 1px solid currentColor; font-weight: 600; }
+  .chip.ok { color: var(--good); } .chip.no { color: var(--bad); }
+
+  .holds { display: grid; grid-template-columns: repeat(auto-fit, minmax(258px, 1fr)); gap: 12px; }
+  .holds .card h3 { margin: 0 0 4px; font-size: 14px; display: flex; align-items: center; gap: 7px; }
+  .holds .note { color: var(--text-muted); font-size: 12px; margin: 0 0 10px; }
+  .row { display: flex; justify-content: space-between; gap: 10px; font-size: 13px; padding: 3px 0; font-variant-numeric: tabular-nums; }
+  .row .t { color: var(--text-primary); font-weight: 550; }
+  .row .v { color: var(--text-secondary); }
+  .bar { height: 3px; border-radius: 2px; background: var(--surface-2); overflow: hidden; margin-top: 2px; }
+  .bar > i { display: block; height: 100%; border-radius: 2px; }
+
+  .dates { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+  .dates .d { background: var(--surface-1); border: 1px solid var(--border); border-radius: 9px; padding: 10px 13px; font-size: 13px; }
+  .dates .d b { display: block; font-size: 12px; color: var(--text-muted); font-weight: 600; margin-bottom: 2px; }
+
+  footer { margin-top: 36px; color: var(--text-muted); font-size: 12px; line-height: 1.7; }
+  code { background: var(--surface-2); padding: 1px 5px; border-radius: 4px; font-size: 11.5px; }
+  .tip {
+    position: fixed; pointer-events: none; opacity: 0; transition: opacity .1s;
+    background: var(--surface-1); border: 1px solid var(--border); border-radius: 8px;
+    padding: 9px 11px; font-size: 12.5px; box-shadow: 0 6px 20px rgba(0,0,0,.14);
+    font-variant-numeric: tabular-nums; z-index: 10; min-width: 150px;
+  }
+  .tip .d { color: var(--text-muted); margin-bottom: 5px; }
+  .tip .r { display: flex; align-items: center; gap: 7px; justify-content: space-between; }
+  .tip .r span.n { display: inline-flex; align-items: center; gap: 6px; color: var(--text-secondary); }
+  @media (max-width: 560px) { .wrap { padding-top: 18px; } #chart { height: 270px; } h1 { font-size: 18px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <div>
+      <h1>Momentum Lab</h1>
+      <div class="sub" id="sub"></div>
+    </div>
+    <button class="theme" id="themeBtn" type="button">Theme</button>
+  </div>
+
+  <div class="verdict">
+    <span class="badge" id="badge"></span>
+    <p id="vdetail"></p>
+    <p id="vcaveat" style="font-size:13px;color:var(--text-muted)"></p>
+  </div>
+
+  <div class="tiles" id="tiles"></div>
+
+  <h2 id="chartHead">Equity, after costs</h2>
+  <div class="card">
+    <div class="legend" id="legend"></div>
+    <svg id="chart" role="img" aria-label="Equity curves for strategies A, B, C and the SPY benchmark"></svg>
+  </div>
+
+  <h2>Side by side</h2>
+  <div class="card" style="overflow-x:auto">
+    <table id="tbl"></table>
+    <p style="margin:12px 0 0;font-size:12px;color:var(--text-muted)" id="ddnote"></p>
+  </div>
+
+  <h2 id="holdHead">Current positions</h2>
+  <div class="holds" id="holds"></div>
+
+  <h2>Verdict schedule</h2>
+  <div class="dates" id="dates"></div>
+
+  <footer id="foot"></footer>
+</div>
+<div class="tip" id="tip"></div>
+
+<script id="payload" type="application/json">__MOMENTUM_DATA__</script>
+<script>
+(function () {
+  "use strict";
+  var D = JSON.parse(document.getElementById("payload").textContent);
+  var COL = { A: "--series-a", B: "--series-b", C: "--series-c", SPY: "--series-spy" };
+  var KEYS = ["A", "B", "C", "SPY"];               // fixed order, never cycled
+  var cssv = function (n) { return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); };
+  var money = function (v) { return "$" + v.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }); };
+  var pct = function (v, d) { return (v == null || isNaN(v)) ? "—" : (v >= 0 ? "+" : "") + (v * 100).toFixed(d == null ? 2 : d) + "%"; };
+  var el = function (id) { return document.getElementById(id); };
+
+  // ---- theme toggle -------------------------------------------------------
+  var saved = null;
+  try { saved = localStorage.getItem("mlab-theme"); } catch (e) {}
+  if (saved) document.documentElement.setAttribute("data-theme", saved);
+  el("themeBtn").addEventListener("click", function () {
+    var cur = document.documentElement.getAttribute("data-theme");
+    if (!cur) cur = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    var nxt = cur === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", nxt);
+    try { localStorage.setItem("mlab-theme", nxt); } catch (e) {}
+    draw();
+  });
+
+  // ---- header -------------------------------------------------------------
+  el("sub").textContent = "Data through " + D.data_through + " · generated " + D.generated_at +
+    (D.months_elapsed != null ? " · " + D.months_elapsed + " months elapsed" : "");
+  var cls = { "TOO EARLY": "early", "PASSED": "passed", "FAILED": "failed" };
+  var bcls = cls[D.status] || (D.status.indexOf("LEADER") === 0 ? "leader" : "early");
+  var b = el("badge"); b.className = "badge " + bcls; b.textContent = D.status;
+  el("vdetail").textContent = D.detail || "";
+  el("vcaveat").textContent = D.caveat || "";
+
+  // ---- stat tiles ---------------------------------------------------------
+  var tiles = KEYS.map(function (k) {
+    var s = D.series[k];
+    var chg = s.ret == null ? '<span class="chg">not trading yet</span>'
+      : '<span class="chg ' + (s.ret >= 0 ? "pos" : "neg") + '">' + pct(s.ret) + "</span>";
+    return '<div class="tile"><div class="lbl"><i class="dot" style="background:var(' + COL[k] + ')"></i>' +
+      s.short + '</div><div class="val">' + money(s.equity) + "</div>" + chg + "</div>";
+  }).join("");
+  el("tiles").innerHTML = tiles;
+
+  // ---- legend -------------------------------------------------------------
+  el("legend").innerHTML = KEYS.map(function (k) {
+    return '<span class="i"><i class="dot" style="background:var(' + COL[k] + ')"></i>' +
+      D.series[k].short + (k === "SPY" ? " (benchmark)" : "") + "</span>";
+  }).join("");
+
+  // ---- table (also the relief/table view for the low-contrast slot) -------
+  var rows = KEYS.map(function (k) {
+    var s = D.series[k];
+    var chip = k === "SPY" || s.dd_ok == null ? "—"
+      : '<span class="chip ' + (s.dd_ok ? "ok" : "no") + '">' + (s.dd_ok ? "within" : "breach") + "</span>";
+    return "<tr" + (k === "SPY" ? ' class="bench"' : "") + '><td><span class="dot" style="display:inline-block;background:var(' +
+      COL[k] + ');margin-right:7px"></span>' + s.name + "</td><td>" + money(s.equity) + "</td><td>" +
+      pct(s.ret) + "</td><td>" + (s.maxdd == null ? "—" : (s.maxdd * 100).toFixed(2) + "%") + "</td><td>" +
+      chip + "</td><td>" + money(s.costs) + "</td><td>" + s.trades + "</td></tr>";
+  }).join("");
+  el("tbl").innerHTML = "<thead><tr><th>Strategy</th><th>Equity</th><th>Return</th><th>Max DD</th>" +
+    "<th>DD vs 1.5× SPY</th><th>Costs</th><th>Trades</th></tr></thead><tbody>" + rows + "</tbody>";
+  el("ddnote").textContent = D.dd_allowance == null ? "Drawdown allowance is set once trading starts."
+    : "Drawdown allowance this window: " + (D.dd_allowance * 100).toFixed(2) +
+      "% (1.5× SPY's " + (D.spy_maxdd * 100).toFixed(2) + "%). No strategy is ever dropped from this table.";
+
+  // ---- holdings -----------------------------------------------------------
+  el("holdHead").textContent = D.phase === "pending" ? "Committed initial targets" : "Current positions";
+  el("holds").innerHTML = ["A", "B", "C"].map(function (k) {
+    var s = D.series[k], h = s.holdings || {}, ks = Object.keys(h);
+    var tot = ks.reduce(function (a, t) { return a + h[t]; }, 0) + (s.cash || 0);
+    var body = ks.length ? ks.map(function (t) {
+      var w = tot ? h[t] / tot : 0;
+      return '<div class="row"><span class="t">' + t + '</span><span class="v">' +
+        (D.phase === "pending" ? (w * 100).toFixed(1) + "%" : money(h[t]) + " · " + (w * 100).toFixed(1) + "%") +
+        '</span></div><div class="bar"><i style="width:' + (w * 100).toFixed(1) +
+        '%;background:var(' + COL[k] + ')"></i></div>';
+    }).join("") : '<div class="row"><span class="v">100% cash</span></div>';
+    return '<div class="card"><h3><i class="dot" style="background:var(' + COL[k] + ')"></i>' + s.name +
+      '</h3><p class="note">' + (s.latest_note || "") + "</p>" + body +
+      (s.cash > 0.5 ? '<div class="row" style="margin-top:6px"><span class="t">Cash</span><span class="v">' +
+        money(s.cash) + "</span></div>" : "") + "</div>";
+  }).join("");
+
+  // ---- dates --------------------------------------------------------------
+  el("dates").innerHTML =
+    '<div class="d"><b>First fill</b>' + (D.first_fill || "pending") + "</div>" +
+    '<div class="d"><b>6-month verdict</b>' + D.six_month_date + "</div>" +
+    '<div class="d"><b>12-month verdict</b>' + D.twelve_month_date + "</div>";
+
+  el("foot").innerHTML = "Rules are frozen; strategy D (Claude picks) is not enabled. Costs: 5bp per side, " +
+    "$0 commission, fills at the next session's open, dividends reinvested. Cash earns 0%. " +
+    "Data fingerprint <code>" + D.fingerprint.slice(0, 16) + "</code>. " +
+    "<br>A pass may still be luck. One 12-month forward window on one universe does not prove future profits. " +
+    "This page regenerates itself on every run and reloads every 15 minutes.";
+
+  // ---- chart --------------------------------------------------------------
+  var svg = el("chart"), tip = el("tip"), geom = null;
+
+  function draw() {
+    var c = D.curves;
+    svg.innerHTML = "";
+    if (!c || !c.dates || c.dates.length < 2) {
+      el("chartHead").textContent = "Equity, after costs";
+      svg.innerHTML = '<text x="50%" y="50%" text-anchor="middle" fill="' + cssv("--text-muted") +
+        '" font-size="13">No equity history yet — the first fill has not printed.</text>';
+      geom = null; return;
+    }
+    var W = svg.clientWidth || 900, H = svg.clientHeight || 330;
+    var pad = { t: 14, r: 62, b: 26, l: 54 };
+    var iw = Math.max(10, W - pad.l - pad.r), ih = Math.max(10, H - pad.t - pad.b);
+    var all = [];
+    KEYS.forEach(function (k) { (c[k] || []).forEach(function (v) { if (v != null) all.push(v); }); });
+    var lo = Math.min.apply(null, all), hi = Math.max.apply(null, all);
+    var span = (hi - lo) || 1; lo -= span * 0.08; hi += span * 0.08;
+    var n = c.dates.length;
+    var X = function (i) { return pad.l + (n === 1 ? iw / 2 : iw * i / (n - 1)); };
+    var Y = function (v) { return pad.t + ih * (1 - (v - lo) / (hi - lo)); };
+    var ns = "http://www.w3.org/2000/svg";
+    var add = function (t, a) { var e = document.createElementNS(ns, t); for (var k in a) e.setAttribute(k, a[k]); svg.appendChild(e); return e; };
+
+    // recessive grid + y axis
+    var ticks = 5;
+    for (var g = 0; g <= ticks; g++) {
+      var v = lo + (hi - lo) * g / ticks, y = Y(v);
+      add("line", { x1: pad.l, y1: y, x2: pad.l + iw, y2: y, stroke: cssv("--border"), "stroke-width": 1 });
+      var tx = add("text", { x: pad.l - 9, y: y + 4, "text-anchor": "end", fill: cssv("--text-muted"), "font-size": 11 });
+      tx.textContent = "$" + Math.round(v).toLocaleString("en-US");
+    }
+    // x labels: first, middle, last
+    [0, Math.floor((n - 1) / 2), n - 1].filter(function (v, i, a) { return a.indexOf(v) === i; })
+      .forEach(function (i) {
+        var t = add("text", { x: X(i), y: pad.t + ih + 18, "text-anchor": i === 0 ? "start" : (i === n - 1 ? "end" : "middle"),
+          fill: cssv("--text-muted"), "font-size": 11 });
+        t.textContent = c.dates[i];
+      });
+    // baseline at $10,000 if in range
+    if (10000 > lo && 10000 < hi) {
+      add("line", { x1: pad.l, y1: Y(10000), x2: pad.l + iw, y2: Y(10000),
+        stroke: cssv("--text-muted"), "stroke-width": 1, "stroke-dasharray": "1 4", opacity: .7 });
+    }
+    // series, SPY first so strategies sit above it
+    var ends = [];
+    ["SPY", "A", "B", "C"].forEach(function (k) {
+      var ser = c[k]; if (!ser) return;
+      var d = "", started = false;
+      for (var i = 0; i < n; i++) {
+        if (ser[i] == null) continue;
+        d += (started ? "L" : "M") + X(i).toFixed(1) + " " + Y(ser[i]).toFixed(1) + " ";
+        started = true;
+      }
+      add("path", { d: d, fill: "none", stroke: cssv(COL[k]), "stroke-width": 2,
+        "stroke-linejoin": "round", "stroke-linecap": "round",
+        "stroke-dasharray": k === "SPY" ? "5 4" : "none", opacity: k === "SPY" ? .85 : 1 });
+      // direct label at the line end (identity never by color alone)
+      var last = null; for (var j = n - 1; j >= 0; j--) if (ser[j] != null) { last = j; break; }
+      if (last != null) {
+        add("circle", { cx: X(last), cy: Y(ser[last]), r: 3.2, fill: cssv(COL[k]),
+          stroke: cssv("--surface-1"), "stroke-width": 2 });
+        ends.push({ k: k, x: X(last), y: Y(ser[last]) });
+      }
+    });
+    // de-overlap the direct labels: nudge apart, keep inside the plot
+    ends.sort(function (p, q) { return p.y - q.y; });
+    var GAP = 13;
+    for (var e = 1; e < ends.length; e++) {
+      if (ends[e].y - ends[e - 1].y < GAP) ends[e].y = ends[e - 1].y + GAP;
+    }
+    var over = ends.length ? ends[ends.length - 1].y - (pad.t + ih) : 0;
+    if (over > 0) ends.forEach(function (p) { p.y -= over; });
+    ends.forEach(function (p) {
+      var lt = add("text", { x: p.x + 8, y: p.y + 4, fill: cssv("--text-secondary"),
+        "font-size": 11.5, "font-weight": 600 });
+      lt.textContent = p.k === "SPY" ? "SPY" : p.k;
+    });
+    var cross = add("line", { x1: 0, y1: pad.t, x2: 0, y2: pad.t + ih, stroke: cssv("--text-muted"),
+      "stroke-width": 1, opacity: 0, "stroke-dasharray": "2 3" });
+    geom = { X: X, Y: Y, n: n, pad: pad, iw: iw, cross: cross, dots: [] };
+  }
+
+  // hover layer: crosshair + tooltip
+  function move(ev) {
+    if (!geom) return;
+    var r = svg.getBoundingClientRect();
+    var px = (ev.touches ? ev.touches[0].clientX : ev.clientX) - r.left;
+    var i = Math.round((px - geom.pad.l) / (geom.iw / Math.max(1, geom.n - 1)));
+    i = Math.max(0, Math.min(geom.n - 1, i));
+    if (isNaN(i)) return;
+    geom.cross.setAttribute("x1", geom.X(i)); geom.cross.setAttribute("x2", geom.X(i));
+    geom.cross.setAttribute("opacity", .8);
+    var c = D.curves;
+    tip.innerHTML = '<div class="d">' + c.dates[i] + "</div>" + KEYS.map(function (k) {
+      var v = (c[k] || [])[i]; if (v == null) return "";
+      return '<div class="r"><span class="n"><i class="dot" style="background:var(' + COL[k] + ')"></i>' +
+        (k === "SPY" ? "SPY" : k) + "</span><span>" + money(v) + "</span></div>";
+    }).join("");
+    tip.style.opacity = 1;
+    var tw = tip.offsetWidth, th = tip.offsetHeight;
+    var left = Math.min(window.innerWidth - tw - 8, Math.max(8, r.left + geom.X(i) + 14));
+    tip.style.left = left + "px";
+    tip.style.top = Math.max(8, r.top + 12) + "px";
+    void th;
+  }
+  function leave() { tip.style.opacity = 0; if (geom) geom.cross.setAttribute("opacity", 0); }
+  svg.addEventListener("mousemove", move);
+  svg.addEventListener("mouseleave", leave);
+  svg.addEventListener("touchstart", move, { passive: true });
+  svg.addEventListener("touchmove", move, { passive: true });
+  svg.addEventListener("touchend", leave);
+
+  draw();
+  var rt; addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(draw, 120); });
+  setTimeout(function () { location.reload(); }, 15 * 60 * 1000);
+})();
+</script>
+</body>
+</html>

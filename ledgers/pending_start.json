@@ -1,0 +1,147 @@
+{
+  "A": {
+    "weights": {
+      "XLV": 0.2,
+      "XLP": 0.2,
+      "DBC": 0.2,
+      "TLT": 0.2,
+      "FXI": 0.2
+    },
+    "note": "top 5: XLV +10.8%, XLP +5.3%, DBC +5.1%, TLT +0.6%, FXI +0.2%",
+    "ranking": [
+      {
+        "ticker": "XLV",
+        "score": 0.1083,
+        "weight": 0.2
+      },
+      {
+        "ticker": "XLP",
+        "score": 0.0533,
+        "weight": 0.2
+      },
+      {
+        "ticker": "DBC",
+        "score": 0.0513,
+        "weight": 0.2
+      },
+      {
+        "ticker": "TLT",
+        "score": 0.0064,
+        "weight": 0.2
+      },
+      {
+        "ticker": "FXI",
+        "score": 0.0017,
+        "weight": 0.2
+      }
+    ]
+  },
+  "B": {
+    "weights": {
+      "XLE": 0.1,
+      "DBC": 0.1,
+      "XLV": 0.1,
+      "IWD": 0.1,
+      "XLB": 0.1,
+      "XLP": 0.1,
+      "XLK": 0.1,
+      "EWJ": 0.1,
+      "IWM": 0.1,
+      "EFA": 0.1
+    },
+    "note": "top 10: XLE +63.4%, DBC +51.8%, XLV +30.3%, IWD +28.4%, XLB +25.3%, XLP +20.5%, XLK +20.0%, EWJ +16.2%, IWM +14.6%, EFA +13.1%",
+    "ranking": [
+      {
+        "ticker": "XLE",
+        "score": 0.6341,
+        "weight": 0.1
+      },
+      {
+        "ticker": "DBC",
+        "score": 0.5178,
+        "weight": 0.1
+      },
+      {
+        "ticker": "XLV",
+        "score": 0.3029,
+        "weight": 0.1
+      },
+      {
+        "ticker": "IWD",
+        "score": 0.284,
+        "weight": 0.1
+      },
+      {
+        "ticker": "XLB",
+        "score": 0.2533,
+        "weight": 0.1
+      },
+      {
+        "ticker": "XLP",
+        "score": 0.2045,
+        "weight": 0.1
+      },
+      {
+        "ticker": "XLK",
+        "score": 0.2001,
+        "weight": 0.1
+      },
+      {
+        "ticker": "EWJ",
+        "score": 0.1617,
+        "weight": 0.1
+      },
+      {
+        "ticker": "IWM",
+        "score": 0.146,
+        "weight": 0.1
+      },
+      {
+        "ticker": "EFA",
+        "score": 0.1314,
+        "weight": 0.1
+      }
+    ]
+  },
+  "C": {
+    "weights": {
+      "XLE": 0.333333,
+      "DBC": 0.333333,
+      "XLV": 0.333333
+    },
+    "note": "top 3: XLE +63.4%, DBC +51.8%, XLV +30.3%",
+    "ranking": [
+      {
+        "ticker": "XLE",
+        "score": 0.6341,
+        "weight": 0.3333
+      },
+      {
+        "ticker": "DBC",
+        "score": 0.5178,
+        "weight": 0.3333
+      },
+      {
+        "ticker": "XLV",
+        "score": 0.3029,
+        "weight": 0.3333
+      }
+    ]
+  },
+  "SPY": {
+    "weights": {
+      "SPY": 1.0
+    },
+    "note": "buy and hold SPY",
+    "ranking": []
+  },
+  "_meta": {
+    "signal_date": "2026-11-06",
+    "committed_at": "2026-11-09T09:00:59.477020+00:00",
+    "data_through": "2026-11-06",
+    "fingerprint": "e86c9a094db7043ee2efe9a51d65c4c9acb5d806f119e852143381a7d6a4aa8b",
+    "spy_close": 735.29,
+    "spy_sma200": 730.38,
+    "risk_on": true
+  }
+}

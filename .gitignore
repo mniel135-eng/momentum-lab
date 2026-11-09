@@ -1,0 +1,5 @@
+.venv/
+__pycache__/
+data/*.csv
+logs/last_run.log
+dashboard_preview.html
