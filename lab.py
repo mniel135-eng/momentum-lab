@@ -52,22 +52,51 @@ for _d in (DATA, LEDGERS, LOGS, REPORTS):
 # ---------------------------------------------------------------------------
 # Data
 # ---------------------------------------------------------------------------
-def fetch() -> dict[str, pd.DataFrame]:
+def fetch(max_attempts: int = 4) -> dict[str, pd.DataFrame]:
+    """Fetch the full history, retrying transient provider failures.
+
+    A partial fetch is never accepted: dropping a ticker would silently change
+    the universe and therefore the rankings, so we retry the whole set and, if
+    it still will not come down cleanly, fail loudly rather than quietly
+    rank a different universe than the one RULES.md froze.
+    """
+    import tempfile
+    import time
+
     import yfinance as yf
 
+    # Give yfinance's timezone cache its own location; the shared default is
+    # what produces "database is locked" under concurrency.
+    try:
+        yf.set_tz_cache_location(str(Path(tempfile.gettempdir()) / "momentum_lab_yf_cache"))
+    except Exception:
+        pass
+
     tickers = UNIVERSE + [BENCHMARK]
-    raw = yf.Tickers(" ".join(tickers)).history(
-        start=HISTORY_START, auto_adjust=False, actions=True, timeout=90, progress=False
-    )
-    out = {}
-    for field in ("Open", "Close", "Dividends"):
-        df = raw[field].copy()
-        df.index = pd.to_datetime(df.index).tz_localize(None).normalize()
-        out[field] = df.reindex(columns=tickers).sort_index()
-    missing = [t for t in tickers if out["Close"][t].notna().sum() == 0]
-    if missing:
-        raise SystemExit(f"No data returned for: {missing}")
-    return out
+    last_err = "unknown"
+    for attempt in range(1, max_attempts + 1):
+        try:
+            raw = yf.Tickers(" ".join(tickers)).history(
+                start=HISTORY_START, auto_adjust=False, actions=True,
+                timeout=90, progress=False)
+            out = {}
+            for field in ("Open", "Close", "Dividends"):
+                df = raw[field].copy()
+                df.index = pd.to_datetime(df.index).tz_localize(None).normalize()
+                out[field] = df.reindex(columns=tickers).sort_index()
+            missing = [t for t in tickers if out["Close"][t].notna().sum() == 0]
+            if not missing:
+                if attempt > 1:
+                    print(f"Data fetch succeeded on attempt {attempt}.")
+                return out
+            last_err = f"no data returned for {missing}"
+        except Exception as exc:                      # noqa: BLE001 - provider can raise anything
+            last_err = f"{type(exc).__name__}: {exc}"
+        if attempt < max_attempts:
+            wait = 10 * attempt
+            print(f"Attempt {attempt}/{max_attempts} failed ({last_err}); retrying in {wait}s.")
+            time.sleep(wait)
+    raise SystemExit(f"Data fetch failed after {max_attempts} attempts: {last_err}")
 
 
 def total_return_indices(px: dict[str, pd.DataFrame]):
