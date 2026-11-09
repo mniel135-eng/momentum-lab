@@ -7,6 +7,15 @@ on:
   workflow_dispatch:          # lets you run it by hand from the Actions tab
   push:
     branches: [main]
+    # A push made with KEEPALIVE_TOKEN *does* retrigger workflows (unlike one made
+    # with GITHUB_TOKEN), so the nightly result commit must never trigger this
+    # workflow again. Two independent guards: these paths-ignore entries cover
+    # every file the run writes, and the commit message carries [skip ci].
+    paths-ignore:
+      - "ledgers/**"
+      - "reports/**"
+      - "logs/**"
+      - "dashboard.html"
 
 permissions:
   contents: write
@@ -58,7 +67,7 @@ jobs:
           if git diff --staged --quiet; then
             echo "No change in results."
           else
-            git commit -m "Run $(date -u +%Y-%m-%d): refresh ledgers, report and dashboard"
+            git commit -m "Run $(date -u +%Y-%m-%d): refresh ledgers, report and dashboard [skip ci]"
             git push
           fi
 
