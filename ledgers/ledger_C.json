@@ -2,9 +2,9 @@
   "strategy": "C. Aggressive momentum",
   "cash": -0.0,
   "holdings": {
-    "DBC": 3329.52,
-    "XLE": 3369.2,
-    "XLK": 3438.31
+    "DBC": 3305.87,
+    "XLE": 3383.89,
+    "XLK": 3398.67
   },
   "costs": 5.0,
   "trades": [
@@ -56,5 +56,5 @@
       ]
     }
   ],
-  "equity_last": 10137.03
+  "equity_last": 10088.43
 }

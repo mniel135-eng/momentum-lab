@@ -2,11 +2,11 @@
   "strategy": "A. Weekly trend",
   "cash": -0.0,
   "holdings": {
-    "DBC": 1997.71,
-    "FXI": 1997.85,
-    "TLT": 1991.95,
-    "XLP": 2014.07,
-    "XLV": 2019.48
+    "DBC": 1983.52,
+    "FXI": 1983.44,
+    "TLT": 1965.46,
+    "XLP": 2017.17,
+    "XLV": 2025.38
   },
   "costs": 5.0,
   "trades": [
@@ -32,7 +32,7 @@
       "ticker": "TLT",
       "side": "BUY",
       "value": 1999.0,
-      "price": 104.1297
+      "price": 104.1423
     },
     {
       "fill_date": "2026-11-09",
@@ -84,5 +84,5 @@
       ]
     }
   ],
-  "equity_last": 10021.06
+  "equity_last": 9974.98
 }
