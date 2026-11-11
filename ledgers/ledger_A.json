@@ -2,11 +2,11 @@
   "strategy": "A. Weekly trend",
   "cash": -0.0,
   "holdings": {
-    "DBC": 1983.52,
-    "FXI": 1983.44,
-    "TLT": 1965.46,
-    "XLP": 2017.17,
-    "XLV": 2025.38
+    "DBC": 1988.68,
+    "FXI": 1955.19,
+    "TLT": 1966.44,
+    "XLP": 2026.48,
+    "XLV": 2026.13
   },
   "costs": 5.0,
   "trades": [
@@ -84,5 +84,5 @@
       ]
     }
   ],
-  "equity_last": 9974.98
+  "equity_last": 9962.92
 }
