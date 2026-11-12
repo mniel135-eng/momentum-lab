@@ -2,11 +2,11 @@
   "strategy": "A. Weekly trend",
   "cash": -0.0,
   "holdings": {
-    "DBC": 1988.68,
-    "FXI": 1955.19,
-    "TLT": 1966.44,
-    "XLP": 2026.48,
-    "XLV": 2026.13
+    "DBC": 1993.2,
+    "SHY": 1987.0,
+    "TLT": 1937.28,
+    "XLP": 2017.84,
+    "XLV": 2014.12
   },
   "costs": 5.0,
   "trades": [
@@ -21,10 +21,10 @@
     {
       "fill_date": "2026-11-09",
       "signal_date": "2026-11-06",
-      "ticker": "FXI",
+      "ticker": "SHY",
       "side": "BUY",
       "value": 1999.0,
-      "price": 138.1748
+      "price": 121.9393
     },
     {
       "fill_date": "2026-11-09",
@@ -32,7 +32,7 @@
       "ticker": "TLT",
       "side": "BUY",
       "value": 1999.0,
-      "price": 104.1423
+      "price": 104.5794
     },
     {
       "fill_date": "2026-11-09",
@@ -54,7 +54,7 @@
   "decisions": [
     {
       "signal_date": "2026-11-06",
-      "note": "top 5: XLV +10.8%, XLP +5.3%, DBC +5.1%, TLT +0.6%, FXI +0.2%",
+      "note": "top 5: XLV +10.8%, XLP +5.3%, DBC +5.1%, TLT +1.1%, SHY +0.5%",
       "ranking": [
         {
           "ticker": "XLV",
@@ -73,16 +73,16 @@
         },
         {
           "ticker": "TLT",
-          "score": 0.0064,
+          "score": 0.0106,
           "weight": 0.2
         },
         {
-          "ticker": "FXI",
-          "score": 0.0017,
+          "ticker": "SHY",
+          "score": 0.0046,
           "weight": 0.2
         }
       ]
     }
   ],
-  "equity_last": 9962.92
+  "equity_last": 9949.43
 }

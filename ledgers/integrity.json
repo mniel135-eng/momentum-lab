@@ -1,9 +1,10 @@
 {
-  "checked_at": "2026-11-11T23:39:19.253611+00:00",
+  "checked_at": "2026-11-12T23:29:35.978332+00:00",
   "committed_at": "2026-11-09T10:48:20.666260+00:00",
   "start_signal": "2026-11-06",
   "status": "DRIFT",
   "drift": [
+    "A: committed {'XLV': 0.2, 'XLP': 0.2, 'DBC': 0.2, 'TLT': 0.2, 'FXI': 0.2} != replayed {'XLV': 0.2, 'XLP': 0.2, 'DBC': 0.2, 'TLT': 0.2, 'SHY': 0.2}",
     "B: committed {'XLE': 0.1, 'DBC': 0.1, 'XLV': 0.1, 'IWD': 0.1, 'XLB': 0.1, 'XLP': 0.1, 'XLK': 0.1, 'EWJ': 0.1, 'IWM': 0.1, 'EFA': 0.1} != replayed {'DBC': 0.1, 'XLE': 0.1, 'XLK': 0.1, 'SLV': 0.1, 'EEM': 0.1, 'EWJ': 0.1, 'EWZ': 0.1, 'QQQ': 0.1, 'IWD': 0.1, 'XLV': 0.1}",
     "C: committed {'XLE': 0.3333, 'DBC': 0.3333, 'XLV': 0.3333} != replayed {'DBC': 0.3333, 'XLE': 0.3333, 'XLK': 0.3333}"
   ]
