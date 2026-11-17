@@ -2,11 +2,11 @@
   "strategy": "A. Weekly trend",
   "cash": -0.0,
   "holdings": {
-    "IWD": 1976.56,
-    "XLE": 1971.36,
-    "XLP": 1985.68,
-    "XLU": 1992.08,
-    "XLV": 1969.48
+    "IWD": 1950.81,
+    "XLE": 1961.19,
+    "XLP": 1961.28,
+    "XLU": 1960.52,
+    "XLV": 1941.85
   },
   "costs": 10.99,
   "trades": [
@@ -63,7 +63,7 @@
       "signal_date": "2026-11-13",
       "ticker": "IWD",
       "side": "BUY",
-      "value": 1997.05,
+      "value": 1997.1,
       "price": 561.486
     },
     {
@@ -79,15 +79,15 @@
       "signal_date": "2026-11-13",
       "ticker": "TLT",
       "side": "SELL",
-      "value": 1931.93,
-      "price": 101.0705
+      "value": 1932.17,
+      "price": 101.0832
     },
     {
       "fill_date": "2026-11-16",
       "signal_date": "2026-11-13",
       "ticker": "XLE",
       "side": "BUY",
-      "value": 1997.05,
+      "value": 1997.1,
       "price": 303.7164
     },
     {
@@ -95,7 +95,7 @@
       "signal_date": "2026-11-13",
       "ticker": "XLP",
       "side": "SELL",
-      "value": 66.66,
+      "value": 66.61,
       "price": 425.1238
     },
     {
@@ -103,7 +103,7 @@
       "signal_date": "2026-11-13",
       "ticker": "XLU",
       "side": "BUY",
-      "value": 1997.05,
+      "value": 1997.1,
       "price": 408.2332
     },
     {
@@ -111,7 +111,7 @@
       "signal_date": "2026-11-13",
       "ticker": "XLV",
       "side": "SELL",
-      "value": 45.81,
+      "value": 45.76,
       "price": 692.8517
     }
   ],
@@ -179,5 +179,5 @@
       ]
     }
   ],
-  "equity_last": 9895.16
+  "equity_last": 9775.66
 }
