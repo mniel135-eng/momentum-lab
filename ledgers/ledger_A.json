@@ -2,11 +2,11 @@
   "strategy": "A. Weekly trend",
   "cash": -0.0,
   "holdings": {
-    "IWD": 1908.4,
-    "XLE": 1884.74,
-    "XLP": 1926.97,
-    "XLU": 1942.01,
-    "XLV": 1860.29
+    "IWD": 1877.21,
+    "XLE": 1872.97,
+    "XLP": 1939.84,
+    "XLU": 1927.56,
+    "XLV": 1857.99
   },
   "costs": 10.99,
   "trades": [
@@ -179,5 +179,5 @@
       ]
     }
   ],
-  "equity_last": 9522.41
+  "equity_last": 9475.58
 }
