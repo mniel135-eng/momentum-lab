@@ -1,14 +1,8 @@
 {
   "strategy": "A. Weekly trend",
-  "cash": -0.0,
-  "holdings": {
-    "IWD": 1877.21,
-    "XLE": 1872.97,
-    "XLP": 1939.84,
-    "XLU": 1927.56,
-    "XLV": 1857.99
-  },
-  "costs": 10.99,
+  "cash": 9493.67,
+  "holdings": {},
+  "costs": 15.74,
   "trades": [
     {
       "fill_date": "2026-11-09",
@@ -113,6 +107,46 @@
       "side": "SELL",
       "value": 45.76,
       "price": 692.8517
+    },
+    {
+      "fill_date": "2026-11-23",
+      "signal_date": "2026-11-20",
+      "ticker": "IWD",
+      "side": "SELL",
+      "value": 1912.8,
+      "price": 537.7859
+    },
+    {
+      "fill_date": "2026-11-23",
+      "signal_date": "2026-11-20",
+      "ticker": "XLE",
+      "side": "SELL",
+      "value": 1872.66,
+      "price": 284.7929
+    },
+    {
+      "fill_date": "2026-11-23",
+      "signal_date": "2026-11-20",
+      "ticker": "XLP",
+      "side": "SELL",
+      "value": 1919.04,
+      "price": 408.5078
+    },
+    {
+      "fill_date": "2026-11-23",
+      "signal_date": "2026-11-20",
+      "ticker": "XLU",
+      "side": "SELL",
+      "value": 1935.82,
+      "price": 395.7084
+    },
+    {
+      "fill_date": "2026-11-23",
+      "signal_date": "2026-11-20",
+      "ticker": "XLV",
+      "side": "SELL",
+      "value": 1858.09,
+      "price": 644.6274
     }
   ],
   "decisions": [
@@ -177,7 +211,12 @@
           "weight": 0.2
         }
       ]
+    },
+    {
+      "signal_date": "2026-11-20",
+      "note": "RISK-OFF: SPY 689.81 <= 200d SMA 732.76 -> 100% cash",
+      "ranking": []
     }
   ],
-  "equity_last": 9475.58
+  "equity_last": 9493.67
 }
