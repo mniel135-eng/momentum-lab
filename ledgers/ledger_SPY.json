@@ -2,7 +2,7 @@
   "strategy": "SPY benchmark",
   "cash": -0.0,
   "holdings": {
-    "SPY": 9730.16
+    "SPY": 9682.87
   },
   "costs": 5.0,
   "trades": [
@@ -15,5 +15,5 @@
       "price": 751.5151
     }
   ],
-  "equity_last": 9730.16
+  "equity_last": 9682.87
 }

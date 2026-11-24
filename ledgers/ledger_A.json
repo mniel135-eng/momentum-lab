@@ -1,6 +1,6 @@
 {
   "strategy": "A. Weekly trend",
-  "cash": 9493.67,
+  "cash": 9493.54,
   "holdings": {},
   "costs": 15.74,
   "trades": [
@@ -137,8 +137,8 @@
       "signal_date": "2026-11-20",
       "ticker": "XLU",
       "side": "SELL",
-      "value": 1935.82,
-      "price": 395.7084
+      "value": 1935.69,
+      "price": 395.6807
     },
     {
       "fill_date": "2026-11-23",
@@ -218,5 +218,5 @@
       "ranking": []
     }
   ],
-  "equity_last": 9493.67
+  "equity_last": 9493.54
 }
