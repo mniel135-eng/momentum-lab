@@ -1,6 +1,6 @@
 # Momentum Lab — Report
 
-**Run:** 2026-11-25 23:39 UTC
+**Run:** 2026-11-26 23:42 UTC
 **Data through:** 2026-11-25  |  **First fill:** 2026-11-09  |  **Data fingerprint:** `78dd779fe2e9f7f5`
 **Universe:** 30 ETFs (frozen)  |  **Costs:** 5bp/side, $0 commission, fills at next open
 
